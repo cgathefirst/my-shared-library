@@ -71,7 +71,7 @@ pipeline {
         stage('test'){
             steps{
                 script {
-                        dockerImage.dockerTest
+                        dockerImage.dockerTest()
                 }
             }
         }
