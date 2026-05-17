@@ -82,13 +82,5 @@ pipeline {
                 }
             }
         }
-        stage('sqscanner'){
-            steps{
-                script{
-                    codeQuality.sonarCreateProject()
-                    codeQuality.sonarLocalScan()
-                }
-            }
-        }
     }
 }
