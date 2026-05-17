@@ -85,7 +85,7 @@ pipeline {
         stage('sqscanner'){
             steps{
                 script{
-                    codeQuality.sonarCreateProject()
+                    codeQuality.sonarCreateProject('gabi')
                     codeQuality.sonarLocalScan()
                 }
             }
