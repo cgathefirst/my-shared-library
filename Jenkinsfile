@@ -7,7 +7,6 @@ pipeline {
         stage('SCM pull') {
             steps {
                 echo 'Building application...'
-                checkout scm
             }
         }
         stage('Parallel Tests') {
@@ -19,7 +18,7 @@ pipeline {
                         }
                     }
                 }
-            
+
                 stage('trivy scan') {
                     steps {
                         script {
@@ -41,6 +40,8 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
         stage('docker push') {
             parallel {
                 stage('Docker push') {
@@ -50,7 +51,7 @@ pipeline {
                         }
                     }
                 }
-            
+
                 stage('Unit test') {
                     steps {
                         script {
@@ -58,14 +59,8 @@ pipeline {
                         }
                     }
                 }
-                stage('sqscanner'){
-                    steps{
-                        script{
-                        codeQuality.sonarCreateProject('gabi')
-                        codeQuality.sonarLocalScan()
-                        }
-                    }
-                }                
+            }
+        }
         stage('Deploy'){
             steps{
                 script {
@@ -87,3 +82,14 @@ pipeline {
                 }
             }
         }
+        stage('sqscanner'){
+            steps{
+                script{
+                    codeQuality.sonarCreateProject()
+                    codeQuality.sonarCreateProject('gabi')
+                    codeQuality.sonarLocalScan()
+                }
+            }
+        }
+    }
+}
