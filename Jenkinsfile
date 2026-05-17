@@ -9,10 +9,10 @@ pipeline {
                 echo 'Building application...'
             }
         }
-        stage('Checkout') {
-            steps {
-	    	    echo 'Pull SCM...'
-	    	    checkout scm
+    stage('Checkout') {
+        steps {
+	    	echo 'Pull SCM...'
+	    	checkout scm
           	}
         } // end chackout
         stage('Parallel Tests') {
