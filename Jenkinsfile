@@ -41,14 +41,6 @@ pipeline {
                         }
                     }
                 }
-                stage('sqscanner'){
-                    steps{
-                        script{
-                        codeQuality.sonarCreateProject('gabi')
-                        codeQuality.sonarLocalScan()
-                }
-            }
-        }
         stage('docker push') {
             parallel {
                 stage('Docker push') {
@@ -66,8 +58,14 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
+                stage('sqscanner'){
+                    steps{
+                        script{
+                        codeQuality.sonarCreateProject('gabi')
+                        codeQuality.sonarLocalScan()
+                        }
+                    }
+                }                
         stage('Deploy'){
             steps{
                 script {
