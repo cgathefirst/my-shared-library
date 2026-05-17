@@ -9,12 +9,6 @@ pipeline {
                 echo 'Building application...'
             }
         }
-    stage('Checkout') {
-        steps {
-	    	echo 'Pull SCM...'
-	    	checkout scm
-          	}
-        } // end chackout
         stage('Parallel Tests') {
             parallel {
                 stage('Docker build') {
