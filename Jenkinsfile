@@ -7,6 +7,7 @@ pipeline {
         stage('SCM pull') {
             steps {
                 echo 'Building application...'
+                checkout scm
             }
         }
         stage('Parallel Tests') {
